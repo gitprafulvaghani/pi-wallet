@@ -16,31 +16,30 @@ export interface WalletData {
   }
   
   // Mock data
-  const mockWalletData: WalletData = {
-    address: "pi1q2w3e4r5t6y7u8i9o0p1a2s3d4f5g6h7j8k9l",
-    balance: 1234.56,
-    transactions: [
-      {
-        id: "tx1",
-        type: "receive",
-        amount: 100,
-        timestamp: Date.now() - 86400000, // 1 day ago
-        status: "completed",
-        counterparty: "PiNetwork",
-      },
-      {
-        id: "tx2",
-        type: "send",
-        amount: 25,
-        timestamp: Date.now() - 172800000, // 2 days ago
-        status: "completed",
-        counterparty: "Friend",
-      },
-    ],
-  }
+  // const mockWalletData: WalletData = {
+  //   address: "pi1q2w3e4r5t6y7u8i9o0p1a2s3d4f5g6h7j8k9l",
+  //   balance: 1234.56,
+  //   transactions: [
+  //     {
+  //       id: "tx1",
+  //       type: "receive",
+  //       amount: 100,
+  //       timestamp: Date.now() - 86400000, // 1 day ago
+  //       status: "completed",
+  //       counterparty: "PiNetwork",
+  //     },
+  //     {
+  //       id: "tx2",
+  //       type: "send",
+  //       amount: 25,
+  //       timestamp: Date.now() - 172800000, // 2 days ago
+  //       status: "completed",
+  //       counterparty: "Friend",
+  //     },
+  //   ],
+  // }
   
   export async function unlockWallet(
-    passphrase: string,
   ): Promise<{ success: boolean; data?: WalletData; error?: string }> {
     // Simulate API call delay
     await new Promise((resolve) => setTimeout(resolve, 1000))
