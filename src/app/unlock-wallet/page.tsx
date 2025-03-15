@@ -26,6 +26,8 @@ export default function UnlockWallet() {
     }
   }, [searchParams]);
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+
   const handleUnlock = async () => {
     console.log("Submitting with Token:", token);
     console.log("Submitting with Passphrase:", passphrase);
@@ -45,7 +47,7 @@ export default function UnlockWallet() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/wallet/save-passphrase?token=${token}`, 
+        `${API_BASE_URL}/api/wallet/save-passphrase?token=${token}`, 
         { passphrase }, 
         { headers: { "Content-Type": "application/json" } }
       );
