@@ -13,18 +13,24 @@ function UnlockWalletContent() {
   const [token, setToken] = useState<string | null>(null);
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    if (searchParams) {
-      const extractedToken = searchParams.get("token");
-      if (extractedToken) {
-        setToken(extractedToken);
-      } else {
-        setError("Invalid or missing token");
-      }
-    }
-  }, [searchParams]);
-
   const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+
+  useEffect(() => {
+    const extractedToken = searchParams?.get("token");
+    if (extractedToken) {
+      setToken(extractedToken);
+    } else {
+      axios.get(`${API_BASE_URL}/api/wallet/generate-link`)
+        .then(response => {
+          if (response.data.link) {
+            const url = new URL(response.data.link);
+            const newToken = url.searchParams.get("token");
+            if (newToken) setToken(newToken);
+          }
+        })
+        .catch(() => setError("Failed to generate unlock link"));
+    }
+  }, [searchParams, API_BASE_URL]);
 
   const handleUnlock = async () => {
     if (!token) {
