@@ -14,7 +14,7 @@ function UnlockWalletContent() {
   const [token, setToken] = useState<string | null>(null);
   const searchParams = useSearchParams();
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://pi-wallet-backend.onrender.com";
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
   useEffect(() => {
     const extractedToken = searchParams?.get("token");
